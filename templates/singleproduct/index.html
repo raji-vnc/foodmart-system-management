@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'assets/index.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/singleproduct/index.css' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- *************** -->
+    <section>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
+            </div>
+            <div class="search-area">
+                <select>
+                    <option>All Categories</option>
+                    <option>Groceries</option>
+                    <option>Drinks</option>
+                    <option>Chocolates</option>
+
+                    <input type="text" placeholder="Search for more than 20,000 products">
+                    <button> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="nav-right">
+                <div class="support">
+                    <p>For Support?<strong>+980-34984089</strong></p>
+                </div>
+                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="cart">
+                    <p>Your Cart<i class="fa fa-angle-down"></i><strong>$1290.00</strong></p>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <hr>
+    <!-- ******************** -->
+    <section>
+        <nav class="nav-links">
+            <ul class="nav-menu">
+                <li class="dropdown">Shop By Departments</li>
+                <li>Women</li>
+                <li>Men</li>
+                <li>Kids</li>
+                <li>Accessories</li>
+                <li class="dropdown">pages</li>
+                <li>Brand</li>
+                <li>Sale</li>
+                <li>Blog</li>
+            </ul>
+
+            <ul class="nav-menu">
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Blog</li>
+                <li>Contact Us</li>
+                <li><i class="fa-solid fa-cart-shopping"></i></li>
+            </ul>
+
+        </nav>
+    </section>
+    <!-- ***************** -->
+
+    <section>
+        <div class="single-product">
+            <div class="left">
+                <img src="{% static 'assets/images/icon-vegetables-broccoli.png' %}">
+            </div>
+            <div class="right">
+                <a href="#">Home</a>
+                <h1>Yang Set</h1>
+                <p>$92.60</p>
+                <button>ADD TO CART</button>
+            </div>
+
+        </div>
+    </section>    
+
+    <!-- ********************************** -->
+<section class="footer-section">
+    <footer>
+        <div class="footer-logo">
+            <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
+           
+        </div>
+
+        <div class="footer-links">
+        <p>Ultras</p>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Conditions</a></li>
+            <li><a href="#">Our journals</a></li>
+            <li><a href="#">careers</a></li>
+            <li><a href="#">Affiliate Programme</a></li>
+            <li><a href="#">Ultras Press</a></li>
+        </ul>
+        </div>
+        
+        <div class=footer-links>
+            <p>Customer Services</p>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Returns & Refunds</a></li>
+                <li><a href="#">Cookie Guidelines</a></li>
+                <li><a href="#">Delivery Information</a></li>
+        </div>
+
+               
+        <div class=footer-links>
+            <p>Customer Services</p>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Returns & Refunds</a></li>
+                <li><a href="#">Cookie Guidelines</a></li>
+                <li><a href="#">Delivery Information</a></li>
+        </div>
+
+            <div class="footer-links">
+                <p>Subscribe Us</p>
+                <span>Subscribe to our newsletter to get updates about our grand offers.</span>
+                <form>
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                    </form>
+            </div>
+            
+        
+    </footer>
+</section>
+
+
+    
+</body>
+</html>

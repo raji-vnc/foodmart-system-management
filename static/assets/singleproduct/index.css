@@ -1,0 +1,43 @@
+.single-product{
+    display: flex;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 10%;
+}
+.single-product div.left{
+ 
+    
+
+    
+}
+.single-product div.left img{
+    width: 100px;
+    height: 100px;
+}
+.single-product div.right{
+    text-align: center;
+}
+.single-product div.right a{
+    color: gray;
+    font-size: x-small;
+}
+.single-product div.right h1{
+    color: grey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+}
+.single-product div.right p{
+    color: gray;
+    font-size: medium;
+    font-weight: 100;
+}
+.single-product div.right button{
+  padding: 20px 40px;
+  font-size:x-small;
+  color: gren;
+  background-color: aliceblue;  
+  border-radius: 40px;
+  border: none;
+}
