@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+    <link href="{% static 'assets/index.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'wishlist/index.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+ <section>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
+            </div>
+            <div class="search-area">
+                <select>
+                    <option>All Categories</option>
+                    <option>Groceries</option>
+                    <option>Drinks</option>
+                    <option>Chocolates</option>
+
+                    <input type="text" placeholder="Search for more than 20,000 products">
+                    <button> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="nav-right">
+                <div class="support">
+                    <p>For Support?<strong>+980-34984089</strong></p>
+                </div>
+                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="cart">
+                    <p>Your Cart<i class="fa fa-angle-down"></i><strong>$1290.00</strong></p>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <hr>
+    <!-- ******************** -->
+    <section>
+        <nav class="nav-links">
+            <ul class="nav-menu">
+                <li class="dropdown">Shop By Departments</li>
+                <li>Women</li>
+                <li>Men</li>
+                <li>Kids</li>
+                <li>Accessories</li>
+                <li class="dropdown">pages</li>
+                <li>Brand</li>
+                <li>Sale</li>
+                <li>Blog</li>
+            </ul>
+
+            <ul class="nav-menu">
+                <li>Home</li>
+                <li>About Us</li>
+                <li>Blog</li>
+                <li>Contact Us</li>
+                <li><i class="fa-solid fa-cart-shopping"></i></li>
+            </ul>
+
+        </nav>
+    </section>
+    <section class="wishlist-section">
+        <div class="container">
+            <h2 class="wishlist-title">My Wishlist</h2>
+           {% if wishlist_items %}
+            <div class="wishlist-grid">
+                {% for item in wishlist_items %}
+               <div class="wishlist-card">
+                <div class="wishlist-image">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    <button   class="remove-btn" data-product-id="{{ item.product.id }}">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="wishlist-info">
+                    <h4>{{ item.product.name }}</h4>
+                    <p class="unit">{{ item.product.unit }}</p>
+                    <p class="price">{{ item.product.price }}</p>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>{{ item.product.rating }}
+                    </div>
+                    <div class="wishlist-actions">
+                        <a href="{% url 'add_cart' item.product.id %}" class="btn add-cart-btn"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
+                    <button class="btn remove-from-wishlist" data-product-id="{{ item.product.id }}">View</button>
+                    </div>
+                </div>
+               </div> 
+               {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-meg">Your wishlist is empty</p>
+            {% endif %}
+        </div>
+    </section>
+
+    
+<section class="footer-section">
+    <footer>
+        <div class="footer-logo">
+            <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
+           
+        </div>
+
+        <div class="footer-links">
+        <p>Ultras</p>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Conditions</a></li>
+            <li><a href="#">Our journals</a></li>
+            <li><a href="#">careers</a></li>
+            <li><a href="#">Affiliate Programme</a></li>
+            <li><a href="#">Ultras Press</a></li>
+        </ul>
+        </div>
+        
+        <div class=footer-links>
+            <p>Customer Services</p>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Returns & Refunds</a></li>
+                <li><a href="#">Cookie Guidelines</a></li>
+                <li><a href="#">Delivery Information</a></li>
+        </div>
+
+               
+        <div class=footer-links>
+            <p>Customer Services</p>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Returns & Refunds</a></li>
+                <li><a href="#">Cookie Guidelines</a></li>
+                <li><a href="#">Delivery Information</a></li>
+        </div>
+
+            <div class="footer-links">
+                <p>Subscribe Us</p>
+                <span>Subscribe to our newsletter to get updates about our grand offers.</span>
+                <form>
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                    </form>
+            </div>
+            
+        
+    </footer>
+</section>
+
+<script src="{% static 'assets/js/wishlist.js' %}"></script>
+</body>
+
+</html>

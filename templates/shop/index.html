@@ -30,7 +30,7 @@
                 <div class="support">
                     <p>For Support?<strong>+980-34984089</strong></p>
                 </div>
-                <i class="fa-regular fa-user"></i>
+                <a href="{% url 'profile' %}"><i class="fa-regular fa-user"></i></a>
                 <i class="fa-regular fa-heart"></i>
                 <div class="cart">
                     <p>Your Cart<i class="fa fa-angle-down"></i><strong>$1290.00</strong></p>
@@ -58,7 +58,7 @@
                 <li>Home</li>
                 <li>About Us</li>
                 <li>Blog</li>
-                <li>Contact Us</li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
                 <li><i class="fa-solid fa-cart-shopping"></i></li>
             </ul>
 
@@ -73,11 +73,14 @@
             <a href="#" class="view-all">View All Categories</a>
         </div>
         <div class="category-wrapper">
+            {% for category in categories %}
             <div class="category-card">
-                <img src="{% static 'assets/images/icon-vegetables-broccoli.png' %}" alt="Vegetables">
-                <p>Fruits & Veges</p>
+                <!-- <img src="{% static 'assets/images/icon-vegetables-broccoli.png' %}" alt="Vegetables"> -->
+                 <img src="{{category.image.url}}" alt="{{category.name}}">
+                 <p>{{category.name}}</p>
+                <!-- <p>Fruits & Veges</p> -->
             </div>
-            <div class="category-card">
+            <!-- <div class="category-card">
                 <img src="{% static 'assets/images/icon-bread-baguette.png' %}" alt="Vegetables">
                 <p>Breads & Sweets </p>
             </div>
@@ -100,8 +103,8 @@
             <div class="category-card">
                 <img src="{% static 'assets/images/icon-bread-baguette.png' %}" alt="Vegetables">
                 <p>Breads & Sweets </p>
-            </div>
-           
+            </div> -->
+        {% endfor %}
 
         </div>
     </section>
@@ -114,16 +117,20 @@
         </div>
         <div class="brands-wrapper">
             <div class="brand-card">
+                {% for brand in brands %}
                 <div>
-                    <img src="{% static 'assets/images/product-thumb-11.jpg' %}" alt="Brand 1">
+                    <img src="{{brand.image.url}}" alt="{{brand.name}}">
                 </div>
                 <div>
-                    <h4>Amber Jar</h4>
-                    <p>honey best nectar you wish to get</p>
+                    <h4>{{brand.name}}</h4>
+                    <p>{{brand.description}}</p>
                 </div>
+                
+                {% endfor %}
 
             </div>
-            <div class="brand-card">
+
+            <!-- <div class="brand-card">
                 <div>
                     <img src="{% static 'assets/images/product-thumb-12.jpg' %}" alt="Brand 1">
                 </div>
@@ -150,8 +157,9 @@
                     <h4>Amber Jar</h4>
                     <p>honey best nectar you wish to get</p>
                 </div>
-            </div>
-        </div>
+            </div> -->
+          
+        <!-- </div> -->
     </section>
     <!-- **************************** -->
     <section class="trending-products">
@@ -166,25 +174,33 @@
         <hr>
 
         <div class="product-slider">
+             {% for product in products %}
+
+
             <div class="product-card">
+               
                 <div class="product-image">
-                    <span class="discount">-30%</span>
-                    <img src="{% static 'assets/images/thumb-bananas.png' %}" alt="Bananas">
-                    <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
+                    <span class="discount">{{product.discount}}%</span>
+                    <img src="{{ product.image.url }}" alt="Bananas">
+                    <button class="wishlist"><a href="{% url 'wishlist_page' %}">
+<i class="fa-regular fa-heart loveicon {% if product.id in liked_products %}active{% endif %}" 
+   data-product-id="{{ product.id }}"></i>
+   </a>
+   </button>
                 </div>
 
-                <h4>Sunstar Fresh Melon Juices</h4>
-                <p>1 UNIT<span class="rating"><i class="fa-solid fa-star"></i>4.5</span></p>
-                <h3>$18.00</h3>
+                <h4>{{product.name}}</h4>
+                <p>{{product.unit}}<span class="rating"><i class="fa-solid fa-star"></i>{{product.rating}}</span></p>
+                <h3>{{discount.price}}</h3>
                 <div class="add-cart">
-                    <button>-</button>
-                    <input type="text" value="1">
-                    <button>+</button>
-                    <button class="cart-btn">Add to Cart</button>
+                    <!-- 
+                     -->
+                    <button class="cart-btn"><a href="{% url 'add_cart' product.id %}">Add to Cart</a></button>
                 </div>
+              
             </div>
-
-            <div class="product-card">
+  {% endfor %}
+             <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-biscuits.png' %}" alt="Bananas">
@@ -201,10 +217,10 @@
                     <button class="cart-btn">Add to Cart</button>
                 </div>
             </div>
+ -->
 
 
-
-            <div class="product-card">
+            <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-cucumber.png' %}" alt="Bananas">
@@ -220,9 +236,9 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="product-card">
+            <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-milk.png' %}" alt="Bananas">
@@ -238,10 +254,10 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
 
 
-            <div class="product-card">
+            <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-bananas.png' %}" alt="Bananas">
@@ -256,13 +272,13 @@
                     <input type="text" value="1">
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
     <section>
-        <div class="product-slider">
+        <!-- <div class="product-slider">
             <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
@@ -281,9 +297,9 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="product-card">
+            <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-biscuits.png' %}" alt="Bananas">
@@ -299,10 +315,10 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
 
 
-
+<!-- 
             <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
@@ -319,8 +335,8 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
-
+            </div> -->
+<!-- 
             <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
@@ -337,10 +353,10 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
 
 
-            <div class="product-card">
+            <!-- <div class="product-card">
                 <div class="product-image">
                     <span class="discount">-30%</span>
                     <img src="{% static 'assets/images/thumb-bananas.png' %}" alt="Bananas">
@@ -356,9 +372,11 @@
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
                 </div>
-            </div>
+            </div> -->
     </section>
-    <!-- ******************* -->
+
+    
+     <!-- ******************* --> 
     <section>
         <div class="promo-container">
             <div class="promo-card purple-card">
@@ -709,7 +727,7 @@
                     <input type="text" value="1">
                     <button>+</button>
                     <button class="cart-btn">Add to Cart</button>
-                </div>
+                </div> 
             </div>
     </section>
     <!-- ********************* -->
@@ -825,6 +843,7 @@
 </section>
 
 
+<script src="{% static 'assets/js/wish.js' %}"></script>
 </body>
 
 </html

@@ -1,20 +1,23 @@
-
-+<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/index.css">
-    <link href="/payment/index.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'assets/index.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/payment/payment.css' %}">
+    <link href="{% static 'assets/payment/index.css' %}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+        <script src="https://js.stripe.com/v3/"></script>
 
 </head>
 <body>
     <section>
         <nav class="navbar">
             <div class="logo">
-                <img src="/images/logo.png" alt="Logo" class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
             </div>
             <div class="search-area">
                 <select>
@@ -43,7 +46,7 @@
 
     
      <!-- ************************** -->
-    <section>
+    <!-- <section>
         <nav class="nav-links">
             <ul class="nav-menu">
                 <li class="dropdown">Shop By Departments</li>
@@ -67,32 +70,129 @@
 
         </nav>
     </section>
-    <!-- ******************** -->
+    <!- ******************** -->
+<!-- 
+    <script src="https://js.stripe.com/v3/"></script>
 
-<section class="payment-section">
-    <div class="payment">
-            <h1>Payment</h1>
+<h3 class="h3">Enter your payment details</h3>
+<form id="payment-form">
+  <div id="card-element"></div>
+  <button id="submit">Pay</button>
+  <p id="payment-message"></p>
+</form>
 
-      <form class="payment-form">
-        <label for="name">Cardholder Name</label>
-        <input type="text">
-         <label for="number" >Card Number</label>
-        <input type="text" placeholder="0000 0000 0000 0000">
-         <label for="name">End Date</label>
-        <input type="number" placeholder="mm"><br>
-        <input type="number" placeholder="yyyy"><br>
-        <label for="cvv">CVV</label>
-        <input type="text">
-        <button class="pay-btn">Pay Now</button>
-      </form>
-    </div>
-</section>
+<script>
+const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+const elements = stripe.elements();
+const card = elements.create("card");
+card.mount("#card-element");
 
-    <!-- ***************** -->
-<section class="footer-section">
+const form = document.getElementById("payment-form");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const {error, paymentIntent} = await stripe.confirmCardPayment(
+    "{{ client_secret }}", {
+      payment_method: {
+        card: card
+      }
+    }
+  );
+  if (error) {
+    document.getElementById("payment-message").textContent = error.message;
+  } else if (paymentIntent.status === "succeeded") {
+    document.getElementById("payment-message").textContent = "✅ Payment successful!";
+  }
+});
+</script>
+
+
+    <!- ***************** -->
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stripe Payment</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f8fafc;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    button:hover { background: #1e3a8a; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>💳 Pay ₹100</h2>
+    <form id="payment-form">
+      <div id="payment-element"><!--Stripe.js injects Card UI here--></div>
+      <button id="submit">Pay Now</button>
+      <div id="error-message"></div>
+    </form>
+  </div>
+
+  <script>
+    // Initialize Stripe
+    const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+    const options = {
+      clientSecret: "{{ client_secret }}",
+      appearance: { theme: 'stripe' },
+    };
+
+    const elements = stripe.elements(options);
+    const paymentElement = elements.create("payment");
+    paymentElement.mount("#payment-element");
+
+    const form = document.getElementById("payment-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          // ✅ redirect here after successful payment
+          return_url: "http://127.0.0.1:8000/payment/success/",
+        },
+      });
+
+      if (error) {
+        const msg = document.getElementById("error-message");
+        msg.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>
+
+<!-- <section class="footer-section">
     <footer>
         <div class="footer-logo">
-            <img src="/images/logo.png" alt="Logo" class="logo">
+            <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
            
         </div>
 
@@ -140,8 +240,17 @@
                     </form>
             </div>
             
-        
+
+
     </footer>
 </section>
 </body>
-</html>
+</html>   -->
+<!-- <script>
+    stripe.confirmPayment({
+  elements,
+  confirmParams: {
+    return_url: "http://127.0.0.1:8000/payment/success/",
+  },
+});
+</script> -->

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Successful</title>
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .success-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 { color: #16a34a; margin-bottom: 15px; }
+    p { color: #374151; margin: 8px 0; }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .btn:hover { background: #1e3a8a; }
+  </style>
+</head>
+<body>
+  <div class="success-box">
+    <h2>✅ Payment Successful</h2>
+    <p>Thank you for your purchase!</p>
+    <p><strong>Amount Paid:</strong> ₹{{ total|default:"0.00" }}</p>
+    <p><strong>Date:</strong> {{ now|date:"d M Y, h:i A" }}</p>
+    <p><strong>Transaction ID:</strong> {{ payment.transaction_id|default:"DUMMY-TXN" }}</p>
+    <a href="{% url 'admin_dashboard' %}" class="btn">Go to Dashboard</a>
+  </div>
+</body>
+</html>

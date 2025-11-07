@@ -1,0 +1,91 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-section {
+  padding: 60px 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  max-width: 900px;
+  margin: 50px auto;
+  border-radius: 10px;
+}
+
+.container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.container p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.contact-form, .contact-info {
+  flex: 1 1 300px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+}
+
+.btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.contact-info h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.contact-info p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.contact-info i {
+  margin-right: 8px;
+  color: #007bff;
+}

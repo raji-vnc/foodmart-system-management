@@ -1,7 +1,6 @@
-
-
 import os
 from pathlib import Path
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     'payment',
     'reviews',
     'cart',
+    'dashboard',
 ]
 CORS_ALLOW_ALL_ORIGINS=True
 
@@ -60,6 +60,8 @@ REST_FRAMEWORK={
     ],
 }
 
+
+
 ROOT_URLCONF = 'foodmart.urls'
 
 TEMPLATES = [
@@ -72,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                        'shop.context_processors.cart_count',
+
             ],
         },
     },
@@ -132,9 +136,12 @@ STATICFILES_DIRS=[
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STRIPE_PUBLIC_KEY ='pk_test_51QfaiLP3PecGgM9wG2HaQtdvUZjevdj6CNDMBbntynkk3Jl1NEnyCZ17YnGyGLkDGI1Td8oxfe2GdbLN5Msf3UE400yzSGztwL'
+STRIPE_SECRET_KEY='sk_test_51QfaiLP3PecGgM9wz5RQ2aZHHPGsPEZwWLJZaz13fKbpjgB2qpmxHrORCIi7nj2rM5aD2SD681WLMgcmotIELub700dUWyhzjo'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'

@@ -1,0 +1,4 @@
+<h2>✅ Payment Successful!</h2>
+<p>Amount: ₹{{ intent.amount_received|floatformat:2 }}</p>
+<p>Transaction ID: {{ intent.id }}</p>
+<a href="{% url 'admin_dashboard' %}">Go to Dashboard</a>

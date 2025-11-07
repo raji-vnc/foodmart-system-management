@@ -1,0 +1,40 @@
+.payment-section{
+    display: flex;
+    text-align:center;
+    justify-content:center;
+    padding: 90px;
+}
+.payment{
+    width:70%;
+    height:auto;
+    border:none;
+    border-radius:30px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+
+}
+.payment h1{
+    font: size 32px;
+    color:brown;
+}
+.payment-form{
+    padding:30px;
+    text-align: center;
+    justify-content:center;
+}
+.payment-form label{
+    color:brown;
+}
+.payment-form .pay-btn{
+    
+  width:35%;
+  height:auto;
+  background:green;
+  border:none;
+  font-size:34px;
+  border-radius:30px;
+  color:#fff; 
+  text-align:center;
+  justify-content:center;
+  margin: 0 auto;
+  cursor:pointer;
+}

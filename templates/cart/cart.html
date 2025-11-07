@@ -60,7 +60,7 @@
                 <li>About Us</li>
                 <li>Blog</li>
                 <li>Contact Us</li>
-                <li><i class="fa-solid fa-cart-shopping"></i></li>
+                <li><a href="{% url 'view_cart' %}"><i class="fa-solid fa-cart-shopping"></i>{{cart_count}}</a></li>
             </ul>
 
         </nav>
@@ -71,7 +71,19 @@
 </div>
 <section class="cart-mains">
     <div class="cart-item">
+        {% for item in cart_items %}
         <div class="cart-section">
+            <img src="{{item.product.image.url}}">
+            <h5>{{item.product.title}}</h5>
+            <h5>:</h5>
+            <h5>${{item.product.price}}</h5>
+            <button><a href="{% url 'decrease_quantity' item.product.id %}">-</a></button>
+            <button>{{item.quantity}}</button>
+            <button><a href="{% url 'increase_quantity' item.product.id %}">+</a></button>
+            
+        </div>
+      
+         <!-- <div class="cart-section">
             <img src="{% static 'assets/images/thumb-bananas.png' %}">
             <h5>Fruites</h5>
             <h5>:</h5>
@@ -97,17 +109,11 @@
             <button>-</button>
             <button>1</button>
             <button>+</button>
-        </div>
-         <div class="cart-section">
-            <img src="{% static 'assets/images/thumb-bananas.png' %}">
-            <h5>Fruites</h5>
-            <h5>:</h5>
-            <h5>$15.69</h5>
-            <button>-</button>
-            <button>1</button>
-            <button>+</button>
-        </div>
+        </div> -->
+           {% empty %}
+        {% endfor %}
     </div>
+   
 </section>
 <!-- ********************* -->
 
@@ -117,19 +123,18 @@
         <button>Apply Coupon</button>
 
     </form>
+    
     <div class="total">
         <h5>Cart Total</h5>
         <h5>:</h5>
         <div class="total-1">
-            <p>Subtotal</p>
-            <p>:</p>
-            <p>$36.19</p>
+            <p>Subtotal:${{total}}</p>
         </div>
         <div class="total-2">
-            <button>Proceed To Checkout</button>
-
-        </div>
+            <button><a href="{% url 'payment' %}">Proceed To Checkout</a></button>
+        </div>    
     </div>
+    
 </section>
 
     <!-- ******************** -->
@@ -138,6 +143,7 @@
         <div class="footer-logo">
             <img src="{% static 'assets/images/logo.png' %}" alt="Logo" class="logo">
            
+
         </div>
 
         <div class="footer-links">

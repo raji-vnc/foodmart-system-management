@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'assets/dashboard/index.css' %}">
+</head>
+
+<body>
+    <header class="navbar">
+        <h2>Admin Dashboard</h2>
+        <div class="user-info">
+            <span>👋 {{ request.user.username }}</span>
+            <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        
+        <!-- 💬 Contact Messages -->
+<section class="card contact-card">
+  <div class="card-header">
+    <h3>📩 Messages</h3>
+  </div>
+  <div class="message-box">
+    {% for contact in contact %}
+      <div class="message-item">
+        <strong>{{ contact.name }}</strong> — <span>{{ contact.email }}</span>
+        <p>{{ contact.message }}</p>
+        <small>{{ contact.created_at|date:"d M Y H:i" }}</small>
+      </div>
+    {% empty %}
+      <p class="empty">No messages yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- 🛒 Cart Items -->
+<section class="card cart-card">
+  <div class="card-header">
+    <h3>🛒 Cart Details</h3>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Added At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in cartitems %}
+      <tr>
+        <td>{{ c.user.username }}</td>
+        <td>{{ c.product.name }}</td>
+        <td>{{ c.quantity }}</td>
+        <td>{{ c.added_at|date:"d M Y H:i" }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4" class="empty">No cart data.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- 💳 Payments -->
+<section class="card payment-card">
+  <div class="card-header">
+    <h3>💳 Payment Details</h3>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Transaction ID</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in payments %}
+      <tr>
+        <td>{{ p.user.username }}</td>
+        <td>₹{{ p.total_amount }}</td>
+        <td>{{ p.payment_status }}</td>
+        <td>{{ p.transaction_id|default:"—" }}</td>
+        <td>{{ p.payment_date|date:"d M Y H:i" }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5" class="empty">No payments yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+
+        <section class="card product-card">
+            <div class="card-header">
+                <h3>🛒 Products</h3>
+                <a href="{% url 'add_product' %}" class="btn add-btn">+ Add Product</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                    <tr>
+                        <td>{{ p.name }}</td>
+                        <td>₹{{ p.price }}</td>
+                        <td>{{ p.category }}</td>
+                        <td>
+
+
+                            <a href="{% url 'edit_product' p.id %}" class="btn edit-btn">Edit</a>
+                            <a href="{% url 'delete_product' p.id %}" class="btn delete-btn"
+                                onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="empty">No products found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>

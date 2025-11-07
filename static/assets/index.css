@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing:border-box;
+    text-decoration: none;
+    list-style: none;
 }
 .navbar{
     display:flex;
@@ -154,7 +156,8 @@
     display:flex;
     gap:20px;
     overflow-x:auto;
-    padding-bottom:10px;
+    padding-bottom:10px
+    ;
 }
 .brand-card{
     /* flex:0 0 220px; */
@@ -249,6 +252,15 @@
     width:30px;
     height:30px;
     font-size:16px;
+}
+.loveicon{
+    color: #999;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+.loveicon.active{
+color: red!important;
+fill: red !important;
 }
 .product-card h4{
     font-size:14px;

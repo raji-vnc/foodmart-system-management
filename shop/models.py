@@ -1,7 +1,9 @@
-
+from django import forms
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     image=models.ImageField(upload_to='categories/')
@@ -18,6 +20,7 @@ class Brand(models.Model):
     
 class Product(models.Model):
     name=models.CharField(max_length=200)
+    # title=models.CharField(max_length=100)
     description=models.TextField(blank=True)
     price=models.DecimalField(max_digits=10,decimal_places=2)
     discount=models.PositiveBigIntegerField(default=0)
@@ -67,6 +70,10 @@ class CartItem(models.Model):
 
     class Meta:
         unique_together=("user",'product')
+    def subtotal(self):
+        return self.product.price * self.quantity
+    def __str__(self):
+        return f"{self.product.title}({self.quantity})"
 
 class Order(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,related_name='orders',on_delete=models.CASCADE)
@@ -84,10 +91,40 @@ class OrderItem(models.Model):
     qunatity=models.PositiveBigIntegerField()
 
 
+class Like(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together=('user','product')
+
+    def __str__(self):
+        return f"{self.user.username} liked {self.product.name}"
     
 
 
 
+class Contact(models.Model):
+    name=models.CharField(max_length=100)
+    email=models.EmailField()
+    message=models.TextField()
+    created_at=models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name}- {self.email}"
 
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model=Product
+        fields=['name','price','category','description','image']
+
+class Payment(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    total_amount=models.DecimalField(max_digits=10,decimal_places=2)
+    payment_status=models.CharField(max_length=50,default='Pending')
+    payment_date=models.DateTimeField(auto_now_add=True)
+    transaction_id=models.CharField(max_length=100,blank=True,null=True)
+
+    def __str__(self):
+        return f"{self.user.username} -₹{self.total_amount} ({self.payment_status})"

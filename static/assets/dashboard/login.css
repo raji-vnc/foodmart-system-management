@@ -1,0 +1,109 @@
+
+/* ====== Reset & Base ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ====== Login Container ====== */
+.login-container {
+  background: #fff;
+  padding: 40px 45px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* ====== Form ====== */
+.form-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #4b6cb7;
+  box-shadow: 0 0 5px rgba(75, 108, 183, 0.4);
+}
+
+/* ====== Button ====== */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #5c7ed9, #25356b);
+}
+
+/* ====== Error Messages ====== */
+ul {
+  list-style: none;
+  margin-top: 15px;
+}
+
+ul li {
+  color: red;
+  font-size: 0.9rem;
+  background: #ffeaea;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
