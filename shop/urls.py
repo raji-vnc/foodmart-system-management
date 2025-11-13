@@ -1,7 +1,32 @@
-from django.urls import path
+from django.urls import path,include
 from . import views
+from rest_framework.routers import DefaultRouter
+from .api_views import(
+    CategoryViewSet,BrandViewSet,ProductViewSet,
+    CartItemViewSet,PaymentViewSet,LikeViewSet,ContactViewSet,
+    register_user,login_user,user_profile
+)
+
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'brands', BrandViewSet)
+router.register(r'products', ProductViewSet)
+router.register(r'cart', CartItemViewSet)
+router.register(r'payments', PaymentViewSet)
+router.register(r'likes', LikeViewSet)
+router.register(r'contact', ContactViewSet)
+
 
 urlpatterns=[
+      path('api/', include(router.urls)),
+     path('api/auth/register/', register_user, name='register'),
+    path('api/auth/login/', login_user, name='login'),
+    path('api/auth/profile/', user_profile, name='profile'),
+
+
+
+
+
     path('',views.index, name='home'),
     path('add_singleproduct/<int:product_id>/',views.add_single_product,name='singleproduct'),
     path('cart/add-to-cart/<int:product_id>/',views.add_cart,name='add_cart'),
@@ -23,4 +48,5 @@ urlpatterns=[
  path('payment/',views.payment,name='payment'),
  path("payment/payment_success/",views.payment_success,name="payment_success"),
  path('payment/success/',views.dummy_cv_success,name='dummy_cv_success'),
+     
     ]

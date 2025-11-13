@@ -69,7 +69,7 @@ def add_single_product(request,product_id):
 
     }
     return render(request,'singleproduct/index.html',context)
-@login_required(login_url='login')
+@login_required(login_url='/login/')
 def add_cart(request,product_id):
     product=get_object_or_404(Product,id=product_id)
     cart_item, created=CartItem.objects.get_or_create(
@@ -84,6 +84,7 @@ def add_cart(request,product_id):
         
     return redirect('view_cart')
 
+@login_required(login_url='/login/')
 def view_cart(request):
     cart_items=CartItem.objects.filter(user=request.user)
     total=sum(item.product.price*item.quantity for item in  cart_items)
