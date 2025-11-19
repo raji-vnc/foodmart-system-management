@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-w&@x%)jw4&n69*yvu%7)gz8%6#$5cimehtnj04qbafvae$h^0z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -27,15 +27,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+
     'shop',
     'account',
     'payment',
     'reviews',
     'cart',
     'dashboard',
+
 ]
 CORS_ALLOW_ALL_ORIGINS=True
 
@@ -46,17 +49,16 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.message'
-    's.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK={
     "DEFAULT_AUTHENTICATION_CLASSES":[
-        'rest_framework.authentication.SessionAuthentication',
         "rest_framework.authentication.TokenAuthentication",
     ],
     'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
+
     ],
 }
 
@@ -134,7 +136,7 @@ STATICFILES_DIRS=[
     BASE_DIR / "static",
 ]
 
-
+MEDIA_ROOT = '/opt/render/media'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STRIPE_PUBLIC_KEY ='pk_test_51QfaiLP3PecGgM9wG2HaQtdvUZjevdj6CNDMBbntynkk3Jl1NEnyCZ17YnGyGLkDGI1Td8oxfe2GdbLN5Msf3UE400yzSGztwL'
